@@ -26,6 +26,7 @@ Unity Version 2023.2.18f1
 Payer:
 	Rigidbody2D:
 		- Constraints > Freeze Rotation Z: sa fie bifat
+        - Collision Detection: Continuous
 		- Interpolate: Interpolate
 Imagini:
 	Sprite Mode = sa fie pe Multiple
@@ -36,5 +37,9 @@ Imagini:
 	Open Sprite Mode Editor > Slice > Type > Grid By Cell Size > Pixel Size > X: 32, Y: 32
 	
 Animator:
-	- Has exit Time: sa nu fie bifat
-	- Transition Duration (s): sa fie pe 0
+	Has exit Time: sa nu fie bifat
+	Transition Duration (s): sa fie pe 0
+
+Ground:
+    RigitBody2D > Body Type: static
+    Tilemap Collider 2D > Composite Operation: Merge
