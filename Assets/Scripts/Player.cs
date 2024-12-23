@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Animator anim; 
+    private Animator anim;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
     private float yInput;
     private bool facingRight = true;
     private int facingDir = 1;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject deatVfx;
 
     private void Awake()
     {
@@ -82,6 +85,12 @@ public class Player : MonoBehaviour
         isKnocked = false;
     }
 
+    public void Die()
+    {
+        GameObject newDeathVfx = Instantiate(deatVfx, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    } 
+
     private void HandleWallSlide()
     {
         bool canWallSlide = isWallDetected && rb.velocity.y < 0;
@@ -102,7 +111,6 @@ public class Player : MonoBehaviour
 
         if (rb.velocity.y < 0)
         {
-            Debug.Log("Activated coyote jump");
             ActivateCoyoteJump();
         }
     }
