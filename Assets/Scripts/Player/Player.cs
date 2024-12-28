@@ -9,11 +9,14 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private CapsuleCollider2D cd;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float doubleJumpForce;
+    private float defaultGravityScale;
+    private bool canDoubleJump;
 
     [Header("Buffer & Coyote jump")]
     [SerializeField] private float bufferJumpWindow = .25f;
@@ -39,27 +42,33 @@ public class Player : MonoBehaviour
     private bool isAirborne;
     private bool isWallDetected;
 
-    public bool canDoubleJump;
+    [Header("VFX")]
+    [SerializeField] private GameObject deatVfx;
+
     private float xInput;
     private float yInput;
     private bool facingRight = true;
     private int facingDir = 1;
-
-    [Header("VFX")]
-    [SerializeField] private GameObject deatVfx;
+    private bool canBeControlled = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        cd = GetComponent<CapsuleCollider2D>();
+    }
+
+    private void Start()
+    {
+        defaultGravityScale = rb.gravityScale;
+        RespawnFinished(false);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) Knockback();
-
         UpdateAirbornStatus();
 
+        if (canBeControlled == false) return;
         if (isKnocked) return;
 
         HandleInput();
@@ -68,6 +77,22 @@ public class Player : MonoBehaviour
         HandleFlip();
         HandleCollision();
         HandleAnimations();
+    }
+
+    public void RespawnFinished(bool finished)
+    {
+        if (finished)
+        {
+            rb.gravityScale = defaultGravityScale;
+            canBeControlled = true;
+            cd.enabled = true;
+        }
+        else
+        {
+            rb.gravityScale = 0;
+            canBeControlled = false;
+            cd.enabled = false;
+        }
     }
 
     public void Knockback()
