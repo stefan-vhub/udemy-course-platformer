@@ -41,7 +41,7 @@ public class TrapSaw : MonoBehaviour
 
     private void Update()
     {
-        anim.SetBool("active", canMove);
+        anim.SetBool("activate", canMove);
 
         if (canMove == false) return;
         transform.position = Vector2.MoveTowards(transform.position, wayPointPosition[wayPointIndex], moveSpeed * Time.deltaTime);
