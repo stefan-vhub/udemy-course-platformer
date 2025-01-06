@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Mushroom : Enemy
+public class EnemyMushroom : Enemy
 {
     protected override void Update()
     {
         base.Update();
         anim.SetFloat("xVelocity", rb.velocity.x);
+        if (isDead) return;
         HandleCollision();
         HandleMovement();
         if (isGrounded) HandleTurnAround();
