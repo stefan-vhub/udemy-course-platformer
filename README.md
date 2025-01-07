@@ -43,3 +43,4 @@ Animator:
 Ground:
     RigitBody2D > Body Type: static
     Tilemap Collider 2D > Composite Operation: Merge
+    Composite Collider 2D > Geometry Type: Polygons
