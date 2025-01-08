@@ -123,7 +123,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.01985693, y: -0.25005007}
+  m_Offset: {x: 0.01985693, y: -0.42363095}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.3408794, y: 1.5947304}
+  m_Size: {x: 1.3408794, y: 1.2475686}
   m_EdgeRadius: 0
 --- !u!1 &9202986735618944808
 GameObject:
@@ -334,8 +334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 811c0cf6d7ca28343a7096b2595d0ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  damageTrigger: {fileID: 2665649775820635354}
   moveSpeed: 2
   idleDuration: 1.5
   deathImpactSpeed: 5
@@ -349,6 +347,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundCheck: {fileID: 6504383705045544309}
+  playerDetectionDistance: 15
   aggroDuration: 3
-  playerDetected: 0
-  detectionRange: 15

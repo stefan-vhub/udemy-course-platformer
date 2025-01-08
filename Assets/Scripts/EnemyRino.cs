@@ -7,8 +7,6 @@ public class EnemyRino : Enemy
     [SerializeField] private float speedUpRate = .6f;
     private float defaultSpeed;
     [SerializeField] private Vector2 impactPower;
-    [SerializeField] private float detectionRange;
-    private bool playerDetected;
 
     protected override void Start()
     {
@@ -19,25 +17,27 @@ public class EnemyRino : Enemy
     protected override void Update()
     {
         base.Update();
-
-        anim.SetFloat("xVelocity", rb.velocity.x);
-        HandleCollision();
         HandleCharge();
     }
 
     private void HandleCharge()
     {
         if (canMove == false) return;
-        moveSpeed = moveSpeed + (Time.deltaTime * speedUpRate);
-        if (moveSpeed >= maxSpeed) maxSpeed = moveSpeed;
+        HandleSpeedUp();
         rb.velocity = new Vector2(moveSpeed * facingDir, rb.velocity.y);
         if (isWallDetected) WallHit();
         if (!isGroundInFrontDetected) TurnAround();
     }
 
+    private void HandleSpeedUp()
+    {
+        moveSpeed = moveSpeed + (Time.deltaTime * speedUpRate);
+        if (moveSpeed >= maxSpeed) maxSpeed = moveSpeed;
+    }
+
     private void TurnAround()
     {
-        moveSpeed = defaultSpeed;
+        SpeedReset();
         canMove = false;
         rb.velocity = Vector2.zero;
         Flip();
@@ -46,9 +46,14 @@ public class EnemyRino : Enemy
     private void WallHit()
     {
         canMove = false;
-        moveSpeed = defaultSpeed;
+        SpeedReset();
         anim.SetBool("hitWall", true);
         rb.velocity = new Vector2(impactPower.x * -facingDir, impactPower.y);
+    }
+
+    private void SpeedReset()
+    {
+        moveSpeed = defaultSpeed;
     }
 
     private void ChargeIsOver()
@@ -61,13 +66,6 @@ public class EnemyRino : Enemy
     {
         base.HandleCollision();
 
-        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
-        if (playerDetected && isGrounded) canMove = true;
-    }
-
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (detectionRange * facingDir), transform.position.y));
+        if (isPlayerDetected && isGrounded) canMove = true;
     }
 }

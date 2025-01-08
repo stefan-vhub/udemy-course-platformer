@@ -7,23 +7,19 @@ public class EnemyChicken : Enemy
     [Header("Chicken Details")]
     [SerializeField] private float aggroDuration;
     private float aggroTimer;
-    [SerializeField] private bool playerDetected;
-    [SerializeField] private float detectionRange;
     private bool canFlip = true;
 
     protected override void Update()
     {
         base.Update();
-        anim.SetFloat("xVelocity", rb.velocity.x);
         aggroTimer -= Time.deltaTime;
         if (isDead) return;
-        if(playerDetected)
+        if(isPlayerDetected)
         {
             canMove = true;
             aggroTimer = aggroDuration;
         }
         if (aggroTimer < 0) canMove = false;
-        HandleCollision();
         HandleMovement();
         if (isGrounded) HandleTurnAround();
     }
@@ -62,18 +58,5 @@ public class EnemyChicken : Enemy
         base.Flip();
 
         canFlip = true;
-    }
-
-    protected override void HandleCollision()
-    {
-        base.HandleCollision();
-
-        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
-    }
-
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (detectionRange * facingDir), transform.position.y));
     }
 }

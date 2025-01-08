@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 380216498899325886}
   - component: {fileID: 5061788245101645745}
   - component: {fileID: 1628831953523710342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4594077495049786739}
+  - {fileID: 7407529511789716605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &380216498899325886
@@ -234,17 +235,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  jumpForce: 14
+  jumpForce: 16
   doubleJumpForce: 11
   bufferJumpWindow: 0.25
   coyoteJumpWindow: 0.5
   wallJumpDuration: 0.6
   wallJumpForce: {x: 7, y: 14}
-  knockbackDuration: 0.7
+  knockbackDuration: 0.6
   knockbackPower: {x: 5, y: 7}
   groundCheckDistance: 0.8
   wallCheckDistance: 0.7
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  enemyCheck: {fileID: 7407529511789716605}
+  enemyCheckRadius: 0.5
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 64
   deatVfx: {fileID: 2695825070661091244, guid: 61b272be79aeda94d9d8c5b99df9b4a8, type: 3}
+--- !u!1 &5487886279077756236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7407529511789716605}
+  m_Layer: 7
+  m_Name: enemyCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7407529511789716605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5487886279077756236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.738, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3199810897872809655}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
