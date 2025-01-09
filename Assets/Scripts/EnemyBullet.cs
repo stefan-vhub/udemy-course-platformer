@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+using UnityEngine;
+
+public class EnemyBullet : MonoBehaviour
+{
+    [SerializeField] private string playerLayerName = "Player";
+    [SerializeField] private string goundLayerName = "Ground";
+    private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void SetVelocity(Vector2 velocity) => rb.velocity = velocity;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer(playerLayerName)) 
+        {
+            collision.GetComponent<Player>().Knockback(transform.position.x);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer(goundLayerName))
+        {
+            Destroy(gameObject, .05f);
+        }
+    }
+}
