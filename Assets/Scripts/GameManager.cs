@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,4 +67,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         GameObject newObject = Instantiate(prefab, newPosition, Quaternion.identity);
     }
+
+    public void LoadTheEndScene() => SceneManager.LoadScene("TheEnd");
 }

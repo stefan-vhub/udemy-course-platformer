@@ -12,7 +12,7 @@ public class FinishPoint : MonoBehaviour
         if (player != null)
         {
             anim.SetTrigger("activate");
-            Debug.Log("You completed the lavel!");
+            GameManager.instance.LoadTheEndScene();
         }
     }
 }
