@@ -3,11 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class UICredits : MonoBehaviour
 {
+    private UIFadeEffect fadeEffect;
     [SerializeField] private RectTransform rectT;
     [SerializeField] private float scrollSpeed = 200;
     [SerializeField] private string mainMeniuSceneName = "MainMeniu";
     [SerializeField] private float offScreenPosition = 1800;
     private bool creditsSkipped;
+
+    private void Awake()
+    {
+        fadeEffect = GetComponentInChildren<UIFadeEffect>();
+        fadeEffect.ScreenFade(0, 1);
+    }
 
     private void Update()
     {
@@ -25,7 +32,9 @@ public class UICredits : MonoBehaviour
         else GoToMainMenu();
     }
 
-    private void GoToMainMenu()
+    private void GoToMainMenu() => fadeEffect.ScreenFade(1, 1, SwitchToMenuScene);
+
+    private void SwitchToMenuScene()
     {
         SceneManager.LoadScene(mainMeniuSceneName);
     }

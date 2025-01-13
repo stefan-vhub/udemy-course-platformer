@@ -69,4 +69,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadTheEndScene() => SceneManager.LoadScene("TheEnd");
+    public void LevelFinished()
+    {
+        UIInGame.instance.fadeEffect.ScreenFade(1, 1.5f, LoadTheEndScene);
+    }
 }
