@@ -53,6 +53,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -253,7 +254,13 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
+  animators:
+  - {fileID: 22100000, guid: 0b49918b479cba5428c37e259ba51da8, type: 2}
+  - {fileID: 22100000, guid: dc32bf82e1d202a4faf13e8162c419a1, type: 2}
+  - {fileID: 22100000, guid: 85ebf11eb542fa847bef9f67663bb52c, type: 2}
+  - {fileID: 22100000, guid: fc940bc6f01174a448e6e14700df1d49, type: 2}
   deatVfx: {fileID: 2695825070661091244, guid: 61b272be79aeda94d9d8c5b99df9b4a8, type: 3}
+  skinId: 0
 --- !u!1 &5487886279077756236
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,8 +47,10 @@ public class Player : MonoBehaviour
     private bool isAirborne;
     private bool isWallDetected;
 
-    [Header("VFX")]
+    [Header("Player Visuals")]
+    [SerializeField] private AnimatorOverrideController[] animators;
     [SerializeField] private GameObject deatVfx;
+    [SerializeField] private int skinId;
 
     private float xInput;
     private float yInput;
@@ -67,6 +69,7 @@ public class Player : MonoBehaviour
     {
         defaultGravityScale = rb.gravityScale;
         RespawnFinished(false);
+        UpdateSkin();
     }
 
     private void Update()
@@ -89,6 +92,13 @@ public class Player : MonoBehaviour
         HandleFlip();
         HandleCollision();
         HandleAnimations();
+    }
+
+    private void UpdateSkin()
+    {
+        SkinManager skinManager = SkinManager.instance;
+        if (skinManager == null) return;
+        anim.runtimeAnimatorController = animators[skinManager.choosenSkinId];
     }
 
     private void HandleEnemyDetection()
